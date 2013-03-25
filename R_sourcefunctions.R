@@ -1,3 +1,12 @@
+################################################################################
+##
+## R_sourcefunctions.R
+## Workflow: #0
+## 
+## Purpose: Define useful functions for later
+## 
+################################################################################
+
 # AttritionCost : calculates the attrition cost given the 4 arguments
 AttritionCost <- function(obs, pred, creditlimit, purchase_amt) {
   

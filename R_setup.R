@@ -1,3 +1,18 @@
+################################################################################
+##
+## R_setup.R
+## Workflow: #1
+## 
+## Purpose: Load files into workspace; create new variables
+## 
+## Additional Notes: This is the initial R script file. It does not need to be
+## run since it is sourced in R_modelling.R
+##
+################################################################################
+
+rm(list=ls())
+source("R_sourcefunctions.R")   # useful functions
+set.seed(1234)
 load("uwdmc2013_raw")
 library(stringr)
 library(plyr)
@@ -51,6 +66,7 @@ df[df$ind_group6 == 1, ]$mgroup6 <- "discret"
 df[(df$ind_group6 == 0 & df$ind_group4 == 1), ]$mgroup6 <- "nondiscretcomp"
 df$mgroup6 <- factor(df$mgroup6)
 
+
 # Count: mgroup ----------------------------------------------
 # This variable is picked because its put emphasis on categories of purchases
 # that have never been made before and de-emphasizes categories of purchases
@@ -88,3 +104,9 @@ max.vec <- df.names[str_detect(df.names, "max")]
 max.df <- subset(df, select = max.vec)
 df$max_purchase <- apply(max.df, 1, max)
 df$is_gt_maxpurchase <- factor(ifelse(df$authzn_amt > df$max_purchase, 1, 0))
+
+
+
+# Change Integer Factors to Factor Variables ------------------------------
+df$sb_indf <- factor(df$sb_ind)
+df$cnp_indf <- factor(df$cnp_ind)
